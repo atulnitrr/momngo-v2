@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.index.TextIndexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -34,8 +35,12 @@ public class LegoSet {
     @Transient // dont persist in database
     private int noOfparts;
 
+    @DBRef
+    PaymentOptions paymentOptions;
+
     @PersistenceConstructor // which constructor mongo will use to do serialization and deserialization
-    public LegoSet(String id, String name, LegoSetDifficulty difficulty, String theme, Collection<ProductReview> productReviews, DeliveryInfo deliveryInfo) {
+    public LegoSet(String id, String name, LegoSetDifficulty difficulty, String theme,
+                   Collection<ProductReview> productReviews, DeliveryInfo deliveryInfo) {
         this.id = id;
         this.name = name;
         this.difficulty = difficulty;
@@ -48,6 +53,25 @@ public class LegoSet {
 
     }
 
+    @PersistenceConstructor // which constructor mongo will use to do serialization and deserialization
+    public LegoSet(String id, String name, LegoSetDifficulty difficulty, String theme,
+                   Collection<ProductReview> productReviews, DeliveryInfo deliveryInfo, PaymentOptions paymentOptions) {
+        this.id = id;
+        this.name = name;
+        this.difficulty = difficulty;
+        this.theme = theme;
+
+        if (productReviews != null) {
+            this.productReviews = productReviews;
+        }
+        this.deliveryInfo = deliveryInfo;
+        this.paymentOptions = paymentOptions;
+
+    }
+
+    public PaymentOptions getPaymentOptions() {
+        return paymentOptions;
+    }
 
     public String getId() {
         return id;

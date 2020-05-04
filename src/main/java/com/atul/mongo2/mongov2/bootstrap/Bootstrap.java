@@ -3,6 +3,8 @@ package com.atul.mongo2.mongov2.bootstrap;
 import com.atul.mongo2.mongov2.model.DeliveryInfo;
 import com.atul.mongo2.mongov2.model.LegoSet;
 import com.atul.mongo2.mongov2.model.LegoSetDifficulty;
+import com.atul.mongo2.mongov2.model.PaymentOptions;
+import com.atul.mongo2.mongov2.model.PaymetType;
 import com.atul.mongo2.mongov2.model.ProductReview;
 import com.atul.mongo2.mongov2.repo.LegosRepo;
 import org.springframework.boot.CommandLineRunner;
@@ -29,6 +31,14 @@ public class Bootstrap implements CommandLineRunner {
         System.out.println("Running command line ");
 //        mongoTemplate.dropCollection(LegoSet.class);
         legosRepo.deleteAll();
+
+        PaymentOptions paymentOptionsOne = new PaymentOptions( 10, PaymetType.CreditCard);
+        PaymentOptions paymentOptionspayPal = new PaymentOptions( 9, PaymetType.Paypal);
+        PaymentOptions cash = new PaymentOptions( 10, PaymetType.Cash);
+
+        mongoTemplate.insert(cash);
+        mongoTemplate.insert(paymentOptionsOne);
+        mongoTemplate.insert(paymentOptionspayPal);
         final LegoSet milleniumFalcon = new LegoSet("1", "fal falcon",
                 LegoSetDifficulty.HARD, "star wars",
                 Arrays.asList(
@@ -36,7 +46,8 @@ public class Bootstrap implements CommandLineRunner {
                         new ProductReview("rama", "5"),
                         new ProductReview("rancho", "9")
                 ),
-                new DeliveryInfo(LocalDate. now(), 16, true)
+                new DeliveryInfo(LocalDate. now(), 16, true),
+                paymentOptionsOne
         );
 
         final LegoSet milleniumFalcon2 = new LegoSet("98", "fal falcon",
@@ -46,7 +57,8 @@ public class Bootstrap implements CommandLineRunner {
                         new ProductReview("rama", "5"),
                         new ProductReview("rancho", "8")
                 ),
-                new DeliveryInfo(LocalDate. now(), 18, true)
+                new DeliveryInfo(LocalDate. now(), 18, true),
+                paymentOptionspayPal
         );
 
         final LegoSet skyPloice = new LegoSet("2", "sky ",
@@ -56,7 +68,8 @@ public class Bootstrap implements CommandLineRunner {
                         new ProductReview("denza", "8"),
                         new ProductReview("tenza", "9")
                 ),
-                new DeliveryInfo(LocalDate. now(), 16, true)
+                new DeliveryInfo(LocalDate. now(), 16, true),
+                cash
         );
 
         final LegoSet mcLaren = new LegoSet("90", "mclaren ",
@@ -67,6 +80,7 @@ public class Bootstrap implements CommandLineRunner {
                         new ProductReview("raksh", "17")
                 ),
                 new DeliveryInfo(LocalDate. now(), 90, false)
+                ,cash
         );
 
 //        mongoTemplate.insertAll(Arrays.asList(mcLaren, milleniumFalcon, skyPloice, milleniumFalcon2));
