@@ -42,7 +42,7 @@ public class Bootstrap implements CommandLineRunner {
                         new ProductReview("rama", "5"),
                         new ProductReview("rancho", "9")
                 ),
-                new DeliveryInfo(LocalDate. now(), 16, true)
+                new DeliveryInfo(LocalDate. now(), 18, true)
         );
 
         final LegoSet skyPloice = new LegoSet("2", "sky ",

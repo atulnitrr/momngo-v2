@@ -61,5 +61,10 @@ public class LegoStoreController {
         return legosRepo.findAllByThemeContains(theme);
     }
 
+    @GetMapping("/byDelivery/{fee}")
+    public Collection<LegoSet> getAllByFee(@PathVariable final int fee) {
+        return legosRepo.findByDeliveryFee(fee);
+    }
+
 
 }
