@@ -66,5 +66,10 @@ public class LegoStoreController {
         return legosRepo.findByDeliveryFee(fee);
     }
 
+    @GetMapping("/byRating/{rating}")
+    public Collection<LegoSet> getAllReview(@PathVariable final String rating) {
+        return  legosRepo.findByALlReview(rating);
+    }
+
 
 }

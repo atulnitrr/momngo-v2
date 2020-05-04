@@ -38,9 +38,9 @@ public class Bootstrap implements CommandLineRunner {
         final LegoSet milleniumFalcon2 = new LegoSet("98", "fal falcon",
                 LegoSetDifficulty.HARD, "star wars",
                 Arrays.asList(
-                        new ProductReview("ana", "5"),
+                        new ProductReview("ana", "6"),
                         new ProductReview("rama", "5"),
-                        new ProductReview("rancho", "9")
+                        new ProductReview("rancho", "8")
                 ),
                 new DeliveryInfo(LocalDate. now(), 18, true)
         );
@@ -48,8 +48,8 @@ public class Bootstrap implements CommandLineRunner {
         final LegoSet skyPloice = new LegoSet("2", "sky ",
                 LegoSetDifficulty.EASY, "sky wars",
                 Arrays.asList(
-                        new ProductReview("acko", "5"),
-                        new ProductReview("denza", "5"),
+                        new ProductReview("acko", "10"),
+                        new ProductReview("denza", "8"),
                         new ProductReview("tenza", "9")
                 ),
                 new DeliveryInfo(LocalDate. now(), 16, true)
@@ -58,9 +58,9 @@ public class Bootstrap implements CommandLineRunner {
         final LegoSet mcLaren = new LegoSet("90", "mclaren ",
                 LegoSetDifficulty.EASY, "mcleren wars",
                 Arrays.asList(
-                        new ProductReview("kul", "5"),
-                        new ProductReview("dj", "5"),
-                        new ProductReview("raksh", "9")
+                        new ProductReview("kul", "12"),
+                        new ProductReview("dj", "14"),
+                        new ProductReview("raksh", "17")
                 ),
                 new DeliveryInfo(LocalDate. now(), 90, false)
         );
