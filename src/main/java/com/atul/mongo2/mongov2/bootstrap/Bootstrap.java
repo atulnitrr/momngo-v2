@@ -23,7 +23,8 @@ public class Bootstrap implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("Running ");
+        System.out.println("Running command line ");
+        mongoTemplate.dropCollection(LegoSet.class);
         final LegoSet milleniumFalcon = new LegoSet("1", "millineum falcon",
                 LegoSetDifficulty.EASY, "Start wars",
                 Arrays.asList(
@@ -54,7 +55,7 @@ public class Bootstrap implements CommandLineRunner {
                 new DeliveryInfo(LocalDate. now(), 90, false)
         );
 
-//        mongoTemplate.insertAll(Arrays.asList(mcLaren, milleniumFalcon, skyPloice));
+        mongoTemplate.insertAll(Arrays.asList(mcLaren, milleniumFalcon, skyPloice));
     }
 
 }
