@@ -55,4 +55,9 @@ public class LegoStoreController {
     public LegoSet getBuyId(@PathVariable final String  id) {
         return legosRepo.findById(id).orElse(null);
     }
+
+    @GetMapping("/byTheme/{theme}")
+    public Collection<LegoSet> getALl(@PathVariable final String theme) {
+        return legosRepo.findAllByThemeContains(theme);
+    }
 }

@@ -26,7 +26,17 @@ public class Bootstrap implements CommandLineRunner {
         System.out.println("Running command line ");
         mongoTemplate.dropCollection(LegoSet.class);
         final LegoSet milleniumFalcon = new LegoSet("1", "millineum falcon",
-                LegoSetDifficulty.EASY, "Start wars",
+                LegoSetDifficulty.EASY, "star wars",
+                Arrays.asList(
+                        new ProductReview("ana", "5"),
+                        new ProductReview("rama", "5"),
+                        new ProductReview("rancho", "9")
+                ),
+                new DeliveryInfo(LocalDate. now(), 16, true)
+        );
+
+        final LegoSet milleniumFalcon2 = new LegoSet("98", "98 falscc falcon",
+                LegoSetDifficulty.EASY, "star wars",
                 Arrays.asList(
                         new ProductReview("ana", "5"),
                         new ProductReview("rama", "5"),
@@ -55,7 +65,7 @@ public class Bootstrap implements CommandLineRunner {
                 new DeliveryInfo(LocalDate. now(), 90, false)
         );
 
-        mongoTemplate.insertAll(Arrays.asList(mcLaren, milleniumFalcon, skyPloice));
+        mongoTemplate.insertAll(Arrays.asList(mcLaren, milleniumFalcon, skyPloice, milleniumFalcon2));
     }
 
 }
