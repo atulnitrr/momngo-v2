@@ -1,8 +1,10 @@
 package com.atul.mongo2.mongov2.controller;
 
 import com.atul.mongo2.mongov2.model.LegoSet;
+import com.atul.mongo2.mongov2.model.QLegoSet;
 import com.atul.mongo2.mongov2.repo.LegosRepo;
 import com.mongodb.client.result.DeleteResult;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -71,6 +73,18 @@ public class LegoStoreController {
     @GetMapping("/byRating/{rating}")
     public Collection<LegoSet> getAllReview(@PathVariable final String rating) {
         return  legosRepo.findByALlReview(rating);
+    }
+
+    @GetMapping("/bestBuy")
+    public Collection<LegoSet> getALlBest() {
+        QLegoSet query = new QLegoSet("query");
+        BooleanExpression aTrue = query.deliveryInfo.inStock.isTrue();
+        BooleanExpression lt = query.deliveryInfo.deliveryFee.lt(50);
+        BooleanExpression eq = query.productReviews.any().rating.eq("10");
+        BooleanExpression and = aTrue.and(lt).and(eq);
+
+        return (Collection<LegoSet>) this.legosRepo.findAll(and);
+
     }
 
 
