@@ -1,6 +1,10 @@
 package com.atul.mongo2.mongov2.model;
 
+import org.springframework.data.mongodb.core.index.TextIndexed;
+
 public class ProductReview {
+
+    @TextIndexed
     private String userName;
     private String rating;
 

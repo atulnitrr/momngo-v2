@@ -3,6 +3,7 @@ package com.atul.mongo2.mongov2.repo;
 import com.atul.mongo2.mongov2.model.LegoSet;
 import com.atul.mongo2.mongov2.model.LegoSetDifficulty;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
@@ -22,4 +23,7 @@ public interface LegosRepo extends MongoRepository<LegoSet, String>, QuerydslPre
 
     @Query("{ 'productReviews.rating' : {$eq : ?0} }")
     Collection<LegoSet> findByALlReview(final String rating);
+
+
+    Collection<LegoSet> findAllBy(TextCriteria textCriteria);
 }

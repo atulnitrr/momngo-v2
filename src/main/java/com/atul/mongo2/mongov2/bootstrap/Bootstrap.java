@@ -4,6 +4,7 @@ import com.atul.mongo2.mongov2.model.DeliveryInfo;
 import com.atul.mongo2.mongov2.model.LegoSet;
 import com.atul.mongo2.mongov2.model.LegoSetDifficulty;
 import com.atul.mongo2.mongov2.model.ProductReview;
+import com.atul.mongo2.mongov2.repo.LegosRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
@@ -16,15 +17,18 @@ import java.util.Arrays;
 public class Bootstrap implements CommandLineRunner {
 
     private MongoTemplate mongoTemplate;
+    private LegosRepo legosRepo;
 
-    public Bootstrap(MongoTemplate mongoTemplate) {
+    public Bootstrap(MongoTemplate mongoTemplate, LegosRepo legosRepo) {
         this.mongoTemplate = mongoTemplate;
+        this.legosRepo = legosRepo;
     }
 
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Running command line ");
-        mongoTemplate.dropCollection(LegoSet.class);
+//        mongoTemplate.dropCollection(LegoSet.class);
+        legosRepo.deleteAll();
         final LegoSet milleniumFalcon = new LegoSet("1", "fal falcon",
                 LegoSetDifficulty.HARD, "star wars",
                 Arrays.asList(
@@ -65,7 +69,8 @@ public class Bootstrap implements CommandLineRunner {
                 new DeliveryInfo(LocalDate. now(), 90, false)
         );
 
-        mongoTemplate.insertAll(Arrays.asList(mcLaren, milleniumFalcon, skyPloice, milleniumFalcon2));
+//        mongoTemplate.insertAll(Arrays.asList(mcLaren, milleniumFalcon, skyPloice, milleniumFalcon2));
+        legosRepo.insert(Arrays.asList(mcLaren, milleniumFalcon, skyPloice, milleniumFalcon2));
     }
 
 }
