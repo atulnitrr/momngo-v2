@@ -5,6 +5,7 @@ import com.atul.mongo2.mongov2.model.LegoSet;
 import com.atul.mongo2.mongov2.model.LegoSetDifficulty;
 import com.atul.mongo2.mongov2.model.ProductReview;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -14,11 +15,15 @@ import java.util.Arrays;
 @Service
 public class Bootstrap implements CommandLineRunner {
 
+    private MongoTemplate mongoTemplate;
+
+    public Bootstrap(MongoTemplate mongoTemplate) {
+        this.mongoTemplate = mongoTemplate;
+    }
 
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Running ");
-
         final LegoSet milleniumFalcon = new LegoSet("1", "millineum falcon",
                 LegoSetDifficulty.EASY, "Start wars",
                 Arrays.asList(
@@ -39,7 +44,7 @@ public class Bootstrap implements CommandLineRunner {
                 new DeliveryInfo(LocalDate. now(), 16, true)
         );
 
-        final LegoSet mcLaren = new LegoSet("1", "mclaren falcon",
+        final LegoSet mcLaren = new LegoSet("90", "mclaren falcon",
                 LegoSetDifficulty.EASY, "mcleren wars",
                 Arrays.asList(
                         new ProductReview("kul", "5"),
@@ -48,6 +53,8 @@ public class Bootstrap implements CommandLineRunner {
                 ),
                 new DeliveryInfo(LocalDate. now(), 90, false)
         );
+
+//        mongoTemplate.insertAll(Arrays.asList(mcLaren, milleniumFalcon, skyPloice));
     }
 
 }
