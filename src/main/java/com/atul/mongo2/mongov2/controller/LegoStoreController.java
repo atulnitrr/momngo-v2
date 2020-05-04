@@ -1,6 +1,7 @@
 package com.atul.mongo2.mongov2.controller;
 
 import com.atul.mongo2.mongov2.model.LegoSet;
+import com.atul.mongo2.mongov2.repo.LegosRepo;
 import com.mongodb.client.result.DeleteResult;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -20,32 +21,33 @@ import java.util.Collection;
 @RequestMapping("legostore/api")
 public class LegoStoreController {
 
-    MongoTemplate mongoTemplate;
+    MongoTemplate mongoTemplate; // dont need it
+
+    LegosRepo legosRepo;
 
 
-    public LegoStoreController(MongoTemplate mongoTemplate) {
+    public LegoStoreController(MongoTemplate mongoTemplate, LegosRepo legosRepo) {
         this.mongoTemplate = mongoTemplate;
+        this.legosRepo = legosRepo;
     }
 
     @PostMapping(path = "/insert")
     public void insertData(@RequestBody LegoSet legoSet) {
-        mongoTemplate.insert(legoSet);
+        legosRepo.insert(legoSet);
     }
 
     @PutMapping(path = "/update")
     public void update(@RequestBody LegoSet legoSet) {
-        mongoTemplate.save(legoSet);
+        legosRepo.save(legoSet);
     }
 
     @GetMapping(path = "/all")
     public Collection<LegoSet> getAll() {
-        return this.mongoTemplate.findAll(LegoSet.class);
+        return this.legosRepo.findAll();
     }
 
     @DeleteMapping("/{id}") // this must match to string id
     public void delete(@PathVariable String id) {
-        DeleteResult id1 = this.mongoTemplate.remove(new Query(Criteria.where("id").is(id)), LegoSet.class);
-        System.out.println("delete count " + id1.getDeletedCount());
-        System.out.println( "was acked " + id1.wasAcknowledged());
+        this.legosRepo.deleteById(id);
     }
 }
