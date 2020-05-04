@@ -60,4 +60,6 @@ public class LegoStoreController {
     public Collection<LegoSet> getALl(@PathVariable final String theme) {
         return legosRepo.findAllByThemeContains(theme);
     }
+
+
 }

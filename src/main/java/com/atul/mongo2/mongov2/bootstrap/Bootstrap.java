@@ -25,8 +25,8 @@ public class Bootstrap implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("Running command line ");
         mongoTemplate.dropCollection(LegoSet.class);
-        final LegoSet milleniumFalcon = new LegoSet("1", "millineum falcon",
-                LegoSetDifficulty.EASY, "star wars",
+        final LegoSet milleniumFalcon = new LegoSet("1", "fal falcon",
+                LegoSetDifficulty.HARD, "star wars",
                 Arrays.asList(
                         new ProductReview("ana", "5"),
                         new ProductReview("rama", "5"),
@@ -35,8 +35,8 @@ public class Bootstrap implements CommandLineRunner {
                 new DeliveryInfo(LocalDate. now(), 16, true)
         );
 
-        final LegoSet milleniumFalcon2 = new LegoSet("98", "98 falscc falcon",
-                LegoSetDifficulty.EASY, "star wars",
+        final LegoSet milleniumFalcon2 = new LegoSet("98", "fal falcon",
+                LegoSetDifficulty.HARD, "star wars",
                 Arrays.asList(
                         new ProductReview("ana", "5"),
                         new ProductReview("rama", "5"),
@@ -45,7 +45,7 @@ public class Bootstrap implements CommandLineRunner {
                 new DeliveryInfo(LocalDate. now(), 16, true)
         );
 
-        final LegoSet skyPloice = new LegoSet("2", "sky falcon",
+        final LegoSet skyPloice = new LegoSet("2", "sky ",
                 LegoSetDifficulty.EASY, "sky wars",
                 Arrays.asList(
                         new ProductReview("acko", "5"),
@@ -55,7 +55,7 @@ public class Bootstrap implements CommandLineRunner {
                 new DeliveryInfo(LocalDate. now(), 16, true)
         );
 
-        final LegoSet mcLaren = new LegoSet("90", "mclaren falcon",
+        final LegoSet mcLaren = new LegoSet("90", "mclaren ",
                 LegoSetDifficulty.EASY, "mcleren wars",
                 Arrays.asList(
                         new ProductReview("kul", "5"),
