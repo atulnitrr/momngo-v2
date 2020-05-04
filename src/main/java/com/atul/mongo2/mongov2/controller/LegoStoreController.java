@@ -3,6 +3,7 @@ package com.atul.mongo2.mongov2.controller;
 import com.atul.mongo2.mongov2.model.LegoSet;
 import com.atul.mongo2.mongov2.repo.LegosRepo;
 import com.mongodb.client.result.DeleteResult;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -43,7 +44,7 @@ public class LegoStoreController {
 
     @GetMapping(path = "/all")
     public Collection<LegoSet> getAll() {
-        return this.legosRepo.findAll();
+        return this.legosRepo.findAll(Sort.by("theme").ascending());
     }
 
     @DeleteMapping("/{id}") // this must match to string id
@@ -58,6 +59,7 @@ public class LegoStoreController {
 
     @GetMapping("/byTheme/{theme}")
     public Collection<LegoSet> getALl(@PathVariable final String theme) {
+
         return legosRepo.findAllByThemeContains(theme);
     }
 
