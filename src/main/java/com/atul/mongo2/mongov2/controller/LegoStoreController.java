@@ -50,4 +50,9 @@ public class LegoStoreController {
     public void delete(@PathVariable String id) {
         this.legosRepo.deleteById(id);
     }
+
+    @GetMapping("/{id}")
+    public LegoSet getBuyId(@PathVariable final String  id) {
+        return legosRepo.findById(id).orElse(null);
+    }
 }
