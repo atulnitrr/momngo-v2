@@ -8,6 +8,7 @@ public class MongoV2Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MongoV2Application.class, args);
+		System.out.println("mongo application ---> ");
 	}
 
 }
